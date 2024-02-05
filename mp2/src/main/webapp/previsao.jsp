@@ -57,8 +57,11 @@
 
        <style>
             #opcoes {
-                width: 200px;
+                margin-top: 32px;
+                width: 300px;
+                height: 32px;
                 color: #333;
+                border-radius: 5px;
                 background-color: #f2f2f2;
             }
        </style>
