@@ -44,6 +44,24 @@
     <section>
         <h1>Previsão de ônibus</h1>
 
+        <div id = busca>
+            <select name="opcoes" id="opcoes">
+                <option value="" selected>- - -</option>
+                <option value="opcao1">Ponto 1</option>
+                <option value="opcao2">Ponto 2</option>
+                <option value="opcao3">Ponto 3</option>
+            </select>
+       </div>
+
+       <div id="resultado"></div>
+
+       <style>
+            #opcoes {
+                width: 200px;
+                color: #333;
+                background-color: #f2f2f2;
+            }
+       </style>
     </section>
     <!-- Fim do Conteúdo -->
 
