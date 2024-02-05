@@ -1,0 +1,48 @@
+footer {
+    background-color: #020202ff;
+    min-height: 260px;
+    bottom: 0;
+    width: 100%;
+  
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+footer h2 {
+    color: white;
+}
+  
+footer h3 {
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+footer p {
+    font-weight: 200;
+}
+  
+.menu-footer ul li a{
+    text-decoration: none;
+    color: white;
+    font-weight: 400;
+    font-size: 1rem;
+}
+  
+.menu-footer ul li a:hover{
+    font-weight: 600;
+}
+  
+.info-footer p {
+    color: white;
+    min-width: 150px;
+    font-weight: 400;
+}
+
+#logo-footer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
