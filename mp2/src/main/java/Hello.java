@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/hello")
 public class Hello extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private String str = "conexao não realizada";
+	private String str = "conexao nao realizada";
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
@@ -42,7 +42,7 @@ public class Hello extends HttpServlet {
 
 		page = "<!doctype html>"
 				+ "<html>" + "<head>" + "<meta charset=\"UTF-8\">" + "<title>Testa Conexao</title>"
-				+ "</head>" + "<body>" + "<h1>Testa conexao</h1>" + "<h2>Conexão: " + str + "!</h2>"
+				+ "</head>" + "<body>" + "<h1>Testa conexao</h1>" + "<h2>Conexao: " + str + "!</h2>"
 				+ "</body>" + "</html>";
 
 		return page;
