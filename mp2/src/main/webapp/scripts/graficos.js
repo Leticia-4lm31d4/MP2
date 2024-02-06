@@ -1,57 +1,73 @@
 google.charts.load('current', {'packages':['corechart']});
 
-// Atrasos dos ônibus :: Gráfico de Pizza
-google.charts.setOnLoadCallback(desenharGraficoPizza);
+// Function to fetch data from the servlet and update the charts
+function fetchDataAndDrawCharts() {
+    $.ajax({
+        url: '/atrasoservlet',
+        type: 'GET',
+        dataType: 'json',
+        success: function(data) {
+            // Assuming the data format is compatible with Google Charts
+            drawCharts(data);
+        },
+        error: function(xhr, status, error) {
+            console.error('Failed to fetch data:', error);
+        }
+    });
+}
 
-function desenharGraficoPizza() {
-    fetch('url-do-seu-servlet-de-atrasos')
+
+// Atrasos dos ônibus :: Gráfico de Pizza
+google.charts.setOnLoadCallback(desenharGraficoAtrasos);
+
+function desenharGraficoAtrasos() {
+    fetch('/atrasoservlet')
         .then(response => response.json())
         .then(data => {
             var dataTable = new google.visualization.DataTable();
             dataTable.addColumn('string', 'Categoria');
             dataTable.addColumn('number', 'Porcentagem');
-            data.forEach(item => {
-                dataTable.addRow([item.categoria, item.porcentagem]);
-            });
+            dataTable.addRow(['Atrasados', data.porcentagem_atrasados]);
+            dataTable.addRow(['No Horário', data.porcentagem_no_horario]);
 
             var options = {
                 //title: 'Distribuição de Atrasos dos Ônibus',
                 pieHole: 0.25,
             };
 
-            var chart = new google.visualization.PieChart(document.getElementById('grafico-pizza'));
+            var chart = new google.visualization.PieChart(document.getElementById('grafico-atrasos'));
             chart.draw(dataTable, options);
         });
 }
 
-// Lotação dos ônibus :: Gráfico de Linhas
-google.charts.setOnLoadCallback(desenharGraficoBarras);
+// Lotação média por linha de ônibus :: Gráfico de Barras
+google.charts.setOnLoadCallback(desenharGraficoLinhaporLinha);
 
-function desenharGraficoBarras() {
-    fetch('url-do-seu-servlet-de-lotacao')
+function desenharGraficoLinhaporLinha() {
+    fetch('url-do-seu-servlet-de-lotacao-media')
         .then(response => response.json())
         .then(data => {
             var dataTable = new google.visualization.DataTable();
-            dataTable.addColumn('string', 'Horário');
+            dataTable.addColumn('string', 'Linha de Ônibus');
             dataTable.addColumn('number', 'Lotação Média');
             data.forEach(item => {
-                dataTable.addRow([item.horario, item.lotacaoMedia]);
+                dataTable.addRow([item.nome_linha, item.lotacao_media]);
             });
 
             var options = {
-                //title: 'Lotação Média dos Ônibus por Horário',
+                //title: 'Lotação Média por Linha de Ônibus',
                 chartArea: {width: '60%'},
                 hAxis: {
                     title: 'Lotação Média',
                     minValue: 0,
-                    maxValue: 60
+                    maxValue: 50
                 },
                 vAxis: {
-                    title: 'Horário'
+                    title: 'Linha de Ônibus'
                 }
             };
 
-            var chart = new google.visualization.BarChart(document.getElementById('grafico-barras'));
+            var chart = new google.visualization.BarChart(document.getElementById('grafico-linhaporlinha'));
             chart.draw(dataTable, options);
         });
 }
